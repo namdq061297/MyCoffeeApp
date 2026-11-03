@@ -14,10 +14,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mycoffeeapp.R
+import com.example.mycoffeeapp.ui.theme.LightBrown
 
 @Preview(showBackground = true)
 @Composable
@@ -58,11 +60,11 @@ fun BottomAppNavBar() {
                 },
                 label = { Text(text = item.label) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = MaterialTheme.colorScheme.surface
+                    selectedTextColor = LightBrown,
+                    selectedIconColor = LightBrown,
+                    unselectedIconColor = Color.DarkGray,
+                    unselectedTextColor = Color.DarkGray,
+                    indicatorColor = LightBrown.copy(alpha = 0.1f)
                 )
             )
             // Add navigation bar item logic here
