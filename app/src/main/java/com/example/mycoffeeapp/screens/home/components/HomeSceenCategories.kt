@@ -1,4 +1,4 @@
-package com.example.mycoffeeapp.screens.ui_components
+package com.example.mycoffeeapp.screens.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyRow
