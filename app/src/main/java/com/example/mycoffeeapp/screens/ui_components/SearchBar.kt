@@ -2,18 +2,15 @@ package com.example.mycoffeeapp.screens.ui_components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,57 +41,54 @@ fun SearchBar(
 ) {
     val shape = RoundedCornerShape(12.dp)
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(52.dp)
-            .clip(shape)
-            .background(SearchFieldColor),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Spacer(modifier = Modifier.width(16.dp))
-        Icon(
-            painter = painterResource(id = R.drawable.regular_outline_search),
-            contentDescription = "Search",
-            tint = Color.White,
-            modifier = Modifier.size(20.dp),
-        )
-        Spacer(modifier = Modifier.width(12.dp))
-
-        BasicTextField(
-            value = query,
-            onValueChange = onQueryChange,
-            singleLine = true,
-            textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-            cursorBrush = SolidColor(LightBrown),
-            modifier = Modifier.weight(1f),
-            decorationBox = { innerTextField ->
-                Box(contentAlignment = Alignment.CenterStart) {
-                    if (query.isEmpty()) {
-                        Text(text = placeholder, color = PlaceholderColor, fontSize = 14.sp)
-                    }
-                    innerTextField()
-                }
-            },
-        )
-
-        Spacer(modifier = Modifier.width(8.dp))
-        IconButton(
-            onClick = onFilterClick,
-            modifier = Modifier
-                .padding(4.dp)
-                .size(44.dp)
-                .clip(shape)
-                .background(LightBrown),
-        ) {
+    TextField(
+        value = query,
+        onValueChange = onQueryChange,
+        modifier = modifier.fillMaxWidth(),
+        singleLine = true,
+        shape = shape,
+        textStyle = TextStyle(fontSize = 14.sp),
+        placeholder = { Text(text = placeholder, fontSize = 14.sp) },
+        leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.regular_outline_filter),
-                contentDescription = "Filter",
-                tint = Color.White,
+                painter = painterResource(id = R.drawable.regular_outline_search),
+                contentDescription = "Search",
                 modifier = Modifier.size(20.dp),
             )
-        }
-    }
+        },
+        trailingIcon = {
+            IconButton(
+                onClick = onFilterClick,
+                modifier = Modifier
+                    .padding(end = 6.dp)
+                    .size(44.dp)
+                    .clip(shape)
+                    .background(LightBrown),
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.regular_outline_filter),
+                    contentDescription = "Filter",
+                    tint = Color.White,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+        },
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = SearchFieldColor,
+            unfocusedContainerColor = SearchFieldColor,
+            focusedTextColor = Color.White,
+            unfocusedTextColor = Color.White,
+            focusedPlaceholderColor = PlaceholderColor,
+            unfocusedPlaceholderColor = PlaceholderColor,
+            focusedLeadingIconColor = Color.White,
+            unfocusedLeadingIconColor = Color.White,
+            cursorColor = LightBrown,
+            // Ẩn đường gạch chân mặc định của TextField
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+        ),
+    )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFF1F1F1F)
