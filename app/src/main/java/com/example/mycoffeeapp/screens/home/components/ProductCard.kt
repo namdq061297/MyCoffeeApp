@@ -1,6 +1,5 @@
 package com.example.mycoffeeapp.screens.home.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,9 +44,6 @@ import java.util.Locale
 fun ProductCard(
     product: Product,
     modifier: Modifier = Modifier,
-    // Product chỉ có imageUrl (ảnh online) nhưng project chưa có thư viện tải ảnh,
-    // nên tạm thời dùng ảnh trong drawable do cha truyền vào.
-    @DrawableRes imageRes: Int = R.drawable.coffee_1,
     onClick: () -> Unit = {},
     onAddClick: () -> Unit = {},
 ) {
@@ -72,7 +68,7 @@ fun ProductCard(
                     .aspectRatio(1f) // ảnh vuông, co giãn theo độ rộng cột
             ) {
                 Image(
-                    painter = painterResource(imageRes),
+                    painter = painterResource(product.imageUrl),
                     contentDescription = product.name,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

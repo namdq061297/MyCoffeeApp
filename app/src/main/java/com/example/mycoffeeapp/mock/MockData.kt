@@ -1,5 +1,6 @@
 package com.example.mycoffeeapp.mock
 
+import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.model.Product
 object MockData {
     val productMockData = listOf(
@@ -8,7 +9,7 @@ object MockData {
             name = "Cappuccino",
             description = "A classic Italian coffee drink made with espresso, steamed milk, and a layer of frothed milk.",
             price = 3.99,
-            imageUrl = "https://images.unsplash.com/photo-1601924582975-4c8e6f0b9f1d",
+            imageUrl = R.drawable.coffee_1,
             category = "Coffee"
         ),
         Product(
@@ -16,7 +17,7 @@ object MockData {
             name = "Latte",
             description = "A creamy coffee drink made with espresso and steamed milk, often topped with a small amount of foam.",
             price = 4.49,
-            imageUrl = "https://images.unsplash.com/photo-1589927986089-35812388d1a0",
+            imageUrl = R.drawable.coffee_2,
             category = "Coffee"
         ),
         Product(
@@ -24,7 +25,7 @@ object MockData {
             name = "Espresso",
             description = "A strong and concentrated coffee made by forcing hot water through finely-ground coffee beans.",
             price = 2.99,
-            imageUrl = "https://images.unsplash.com/photo-1511920170033-f8396924c348",
+            imageUrl = R.drawable.coffee_3,
             category = "Coffee"
         ),
         Product(
@@ -32,7 +33,7 @@ object MockData {
             name = "Mocha",
             description = "A chocolate-flavored coffee drink made with espresso, steamed milk, and chocolate syrup.",
             price = 4.99,
-            imageUrl = "https://images.unsplash.com/photo-1601924582975-4c8e6f0b9f1d",
+            imageUrl = R.drawable.coffee_4,
             category = "Coffee"
         ),
     )
