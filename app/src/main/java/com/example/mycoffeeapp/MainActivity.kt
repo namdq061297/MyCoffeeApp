@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.mycoffeeapp.screens.home.HomeScreen
+import com.example.mycoffeeapp.navigation.AppNavGraph
 import com.example.mycoffeeapp.ui.theme.MyCoffeeAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyCoffeeAppTheme {
-                HomeScreen()
+                AppNavGraph()
             }
         }
     }

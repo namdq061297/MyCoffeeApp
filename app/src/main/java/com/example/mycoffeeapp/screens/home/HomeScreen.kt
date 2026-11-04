@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycoffeeapp.R
+import com.example.mycoffeeapp.model.Product
 import com.example.mycoffeeapp.screens.home.components.HomeScreenCategories
 import com.example.mycoffeeapp.screens.home.components.ProductGrid
 import com.example.mycoffeeapp.screens.ui_components.BottomAppNavBar
@@ -34,7 +35,9 @@ import com.example.mycoffeeapp.screens.ui_components.SearchBar
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onProductClick: (Product) -> Unit = {},
+) {
     val location = "Hanoi, Vietnam" // Replace with your actual location
 
     Scaffold(
@@ -44,6 +47,7 @@ fun HomeScreen() {
         // Các section phía trên được đưa vào topContent (item đầu tiên, chiếm full 2 cột).
         ProductGrid(
             modifier = Modifier.padding(innerPadding),
+            onProductClick = onProductClick,
             topContent = { HomeHeader(location = location) },
         )
     }
