@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyCoffeeAppTheme {
-                AppNavGraph()
+                AppNavGraph(localStorage = localStorage)
             }
         }
     }

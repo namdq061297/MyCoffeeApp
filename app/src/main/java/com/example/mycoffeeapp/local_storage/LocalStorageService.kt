@@ -36,6 +36,14 @@ class LocalStorageService(
         }
     }
 
+    // UPDATE STRING: đọc và ghi trong cùng một transaction, nên bấm nhanh liên tục không bị mất dữ liệu
+    suspend fun updateString(key: String, transform: (String?) -> String) {
+        context.dataStore.edit { preferences ->
+            val preferenceKey = stringPreferencesKey(key)
+            preferences[preferenceKey] = transform(preferences[preferenceKey])
+        }
+    }
+
     // SAVE BOOLEAN
     suspend fun saveBoolean(key: String, value: Boolean) {
         context.dataStore.edit { preferences ->

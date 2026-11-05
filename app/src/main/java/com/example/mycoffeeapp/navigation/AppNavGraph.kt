@@ -2,15 +2,20 @@ package com.example.mycoffeeapp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.mycoffeeapp.data.local.LocalStorageService
+import com.example.mycoffeeapp.local_storage.CartStorage
 import com.example.mycoffeeapp.mock.MockData
 import com.example.mycoffeeapp.screens.home.HomeScreen
 import com.example.mycoffeeapp.screens.product.ProductDetailScreen
+import kotlinx.coroutines.launch
 
 // Tên các route trong app
 object Routes {
@@ -22,8 +27,12 @@ object Routes {
 
 @Composable
 fun AppNavGraph(
+    localStorage: LocalStorageService,
     navController: NavHostController = rememberNavController(),
 ) {
+    val cartStorage = remember(localStorage) { CartStorage(localStorage) }
+    val scope = rememberCoroutineScope()
+
     NavHost(navController = navController, startDestination = Routes.HOME) {
 
         composable(Routes.HOME) {
@@ -49,6 +58,9 @@ fun AppNavGraph(
                 ProductDetailScreen(
                     product = product,
                     onBackClick = { navController.popBackStack() },
+                    onAddToCart = { selectedProduct, _ ->
+                        scope.launch { cartStorage.addToCart(selectedProduct) }
+                    },
                 )
             }
         }
