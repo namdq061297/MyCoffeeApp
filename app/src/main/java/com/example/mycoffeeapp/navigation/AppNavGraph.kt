@@ -1,9 +1,11 @@
 package com.example.mycoffeeapp.navigation
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -32,6 +34,7 @@ fun AppNavGraph(
 ) {
     val cartStorage = remember(localStorage) { CartStorage(localStorage) }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     NavHost(navController = navController, startDestination = Routes.HOME) {
 
@@ -59,7 +62,15 @@ fun AppNavGraph(
                     product = product,
                     onBackClick = { navController.popBackStack() },
                     onAddToCart = { selectedProduct, selectedSize ->
-                        scope.launch { cartStorage.addToCart(selectedProduct, selectedSize) }
+                        scope.launch {
+                            cartStorage.addToCart(selectedProduct, selectedSize)
+                            // Chỉ chạy tới đây khi đã lưu xong
+                            Toast.makeText(
+                                context,
+                                "Added ${selectedProduct.name} (${selectedSize.label}) to cart",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        }
                     },
                 )
             }

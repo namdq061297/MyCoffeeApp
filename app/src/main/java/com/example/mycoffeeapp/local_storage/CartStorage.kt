@@ -32,7 +32,7 @@ class CartStorage(
             } else {
                 cart + CartItem(product = product, size = size, count = 1)
             }
-
+            println("Updated cart: $updatedCart")
             gson.toJson(updatedCart)
         }
     }
