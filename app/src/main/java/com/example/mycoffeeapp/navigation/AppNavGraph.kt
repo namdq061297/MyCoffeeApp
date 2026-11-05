@@ -58,8 +58,8 @@ fun AppNavGraph(
                 ProductDetailScreen(
                     product = product,
                     onBackClick = { navController.popBackStack() },
-                    onAddToCart = { selectedProduct, _ ->
-                        scope.launch { cartStorage.addToCart(selectedProduct) }
+                    onAddToCart = { selectedProduct, selectedSize ->
+                        scope.launch { cartStorage.addToCart(selectedProduct, selectedSize) }
                     },
                 )
             }

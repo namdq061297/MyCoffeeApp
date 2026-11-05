@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.mock.MockData
+import com.example.mycoffeeapp.model.CoffeeSize
 import com.example.mycoffeeapp.model.Product
 import com.example.mycoffeeapp.ui.theme.CharcoalGray
 import com.example.mycoffeeapp.ui.theme.LightBrown
@@ -55,8 +56,6 @@ private val DetailBackground = Color(0xFFF9F2ED)
 private val SecondaryText = Color(0xFFA2A2A2)
 private val SelectedSizeBackground = Color(0xFFFFF5EE)
 private val BorderGray = Color(0xFFE3E3E3)
-
-enum class CoffeeSize(val label: String) { S("S"), M("M"), L("L") }
 
 @Composable
 fun ProductDetailScreen(
