@@ -22,32 +22,37 @@ private val UnselectedChipColor = Color(0xFFEDEDED)
 
 @Composable
 fun CategoryChip(
-    label: String,
-    selected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+  label: String,
+  selected: Boolean,
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(8.dp))
-            .background(if (selected) LightBrown else UnselectedChipColor)
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-    ) {
-        Text(
-            text = label,
-            color = if (selected) Color.White else CharcoalGray,
-            fontSize = 14.sp,
-            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
-        )
-    }
+  Box(
+    modifier = modifier
+        .clip(RoundedCornerShape(8.dp))
+        .background(if (selected) LightBrown else UnselectedChipColor)
+        .clickable(onClick = onClick)
+        .padding(horizontal = 16.dp, vertical = 8.dp),
+  ) {
+    Text(
+      text = label,
+      color = if (selected) Color.White else CharcoalGray,
+      fontSize = 14.sp,
+      fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
+    )
+  }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun CategoryChipPreview() {
-    Row {
-        CategoryChip(label = "All Coffee", selected = true, onClick = {})
-        CategoryChip(label = "Latte", selected = false, onClick = {}, modifier = Modifier.padding(start = 8.dp))
-    }
+  Row {
+    CategoryChip(label = "All Coffee", selected = true, onClick = {})
+    CategoryChip(
+      label = "Latte",
+      selected = false,
+      onClick = {},
+      modifier = Modifier.padding(start = 8.dp)
+    )
+  }
 }

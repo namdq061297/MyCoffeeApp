@@ -33,73 +33,73 @@ private val PlaceholderColor = Color(0xFF989898)
 
 @Composable
 fun SearchBar(
-    query: String,
-    onQueryChange: (String) -> Unit,
-    onFilterClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    placeholder: String = "Search coffee",
+  query: String,
+  onQueryChange: (String) -> Unit,
+  onFilterClick: () -> Unit,
+  modifier: Modifier = Modifier,
+  placeholder: String = "Search coffee",
 ) {
-    val shape = RoundedCornerShape(12.dp)
+  val shape = RoundedCornerShape(12.dp)
 
-    TextField(
-        value = query,
-        onValueChange = onQueryChange,
-        modifier = modifier.fillMaxWidth(),
-        singleLine = true,
-        shape = shape,
-        textStyle = TextStyle(fontSize = 14.sp),
-        placeholder = { Text(text = placeholder, fontSize = 14.sp) },
-        leadingIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.regular_outline_search),
-                contentDescription = "Search",
-                modifier = Modifier.size(20.dp),
-            )
-        },
-        trailingIcon = {
-            IconButton(
-                onClick = onFilterClick,
-                modifier = Modifier
-                    .padding(end = 6.dp)
-                    .size(44.dp)
-                    .clip(shape)
-                    .background(LightBrown),
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.regular_outline_filter),
-                    contentDescription = "Filter",
-                    tint = Color.White,
-                    modifier = Modifier.size(24.dp),
-                )
-            }
-        },
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = SearchFieldColor,
-            unfocusedContainerColor = SearchFieldColor,
-            focusedTextColor = Color.White,
-            unfocusedTextColor = Color.White,
-            focusedPlaceholderColor = PlaceholderColor,
-            unfocusedPlaceholderColor = PlaceholderColor,
-            focusedLeadingIconColor = Color.White,
-            unfocusedLeadingIconColor = Color.White,
-            cursorColor = LightBrown,
-            // Ẩn đường gạch chân mặc định của TextField
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-        ),
-    )
+  TextField(
+    value = query,
+    onValueChange = onQueryChange,
+    modifier = modifier.fillMaxWidth(),
+    singleLine = true,
+    shape = shape,
+    textStyle = TextStyle(fontSize = 14.sp),
+    placeholder = { Text(text = placeholder, fontSize = 14.sp) },
+    leadingIcon = {
+      Icon(
+        painter = painterResource(id = R.drawable.regular_outline_search),
+        contentDescription = "Search",
+        modifier = Modifier.size(20.dp),
+      )
+    },
+    trailingIcon = {
+      IconButton(
+        onClick = onFilterClick,
+        modifier = Modifier
+            .padding(end = 6.dp)
+            .size(44.dp)
+            .clip(shape)
+            .background(LightBrown),
+      ) {
+        Icon(
+          painter = painterResource(id = R.drawable.regular_outline_filter),
+          contentDescription = "Filter",
+          tint = Color.White,
+          modifier = Modifier.size(24.dp),
+        )
+      }
+    },
+    colors = TextFieldDefaults.colors(
+      focusedContainerColor = SearchFieldColor,
+      unfocusedContainerColor = SearchFieldColor,
+      focusedTextColor = Color.White,
+      unfocusedTextColor = Color.White,
+      focusedPlaceholderColor = PlaceholderColor,
+      unfocusedPlaceholderColor = PlaceholderColor,
+      focusedLeadingIconColor = Color.White,
+      unfocusedLeadingIconColor = Color.White,
+      cursorColor = LightBrown,
+      // Ẩn đường gạch chân mặc định của TextField
+      focusedIndicatorColor = Color.Transparent,
+      unfocusedIndicatorColor = Color.Transparent,
+      disabledIndicatorColor = Color.Transparent,
+    ),
+  )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFF1F1F1F)
 @Composable
 private fun SearchBarPreview() {
-    var query by remember { mutableStateOf("") }
-    Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
-        SearchBar(
-            query = query,
-            onQueryChange = { query = it },
-            onFilterClick = { },
-        )
-    }
+  var query by remember { mutableStateOf("") }
+  Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
+    SearchBar(
+      query = query,
+      onQueryChange = { query = it },
+      onFilterClick = { },
+    )
+  }
 }

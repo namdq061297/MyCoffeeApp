@@ -42,104 +42,104 @@ import java.util.Locale
 
 @Composable
 fun ProductCard(
-    product: Product,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
-    onAddClick: () -> Unit = {},
+  product: Product,
+  modifier: Modifier = Modifier,
+  onClick: () -> Unit = {},
+  onAddClick: () -> Unit = {},
 ) {
-    Card(
-        onClick = onClick,
-        modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
-        )
+  Card(
+    onClick = onClick,
+    modifier = Modifier.padding(8.dp),
+    shape = RoundedCornerShape(16.dp),
+    colors = CardDefaults.cardColors(
+      containerColor = Color.White
+    ),
+    elevation = CardDefaults.cardElevation(
+      defaultElevation = 4.dp
+    )
+  ) {
+    Column(
+      modifier = Modifier
+        .padding(8.dp),
     ) {
-        Column(
+      Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f) // ảnh vuông, co giãn theo độ rộng cột
+      ) {
+        Image(
+          painter = painterResource(product.imageUrl),
+          contentDescription = product.name,
+          contentScale = ContentScale.Crop,
+          modifier = Modifier
+              .fillMaxSize()
+              .clip(RoundedCornerShape(16.dp))
+        )
+        Box(
+          modifier = Modifier
+              .align(Alignment.TopEnd)
+              .padding(8.dp)          // khoảng cách từ mép ảnh (nằm ngoài nền)
+            .size(32.dp)            // kích thước ô nền
+            .background(
+                color = LightGray.copy(alpha = 0.9f),
+                shape = RoundedCornerShape(8.dp)
+            ),
+          contentAlignment = Alignment.Center, // icon nằm giữa ô
+        )
+        {
+          Icon(
+            painter = painterResource(id = R.drawable.regular_outline_heart),
+            contentDescription = "Add to Favorites",
+            tint = LightBrown,
             modifier = Modifier
-                .padding(8.dp),
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f) // ảnh vuông, co giãn theo độ rộng cột
-            ) {
-                Image(
-                    painter = painterResource(product.imageUrl),
-                    contentDescription = product.name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(16.dp))
-                )
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(8.dp)          // khoảng cách từ mép ảnh (nằm ngoài nền)
-                        .size(32.dp)            // kích thước ô nền
-                        .background(
-                            color = LightGray.copy(alpha = 0.9f),
-                            shape = RoundedCornerShape(8.dp)
-                        ),
-                    contentAlignment = Alignment.Center, // icon nằm giữa ô
-                )
-                {
-                    Icon(
-                        painter = painterResource(id = R.drawable.regular_outline_heart),
-                        contentDescription = "Add to Favorites",
-                        tint = LightBrown,
-                        modifier = Modifier
-                            .size(22.dp)
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = product.name,
-                style = MaterialTheme.typography.titleMedium.copy(
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-            Text(
-                text = product.description,
-                style = MaterialTheme.typography.bodySmall.copy(
-                    color = Color.Gray,
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "$%.2f".format(Locale.US, product.price),
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        color = LightBrown,
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-                IconButton(
-                    onClick = onAddClick,
-                    modifier = Modifier.background(
-                        color = LightBrown,
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add to Cart",
-                        tint = IvoryWhite
-                    )
-                }
-            }
-
+              .size(22.dp)
+          )
         }
+      }
+      Spacer(modifier = Modifier.height(4.dp))
+      Text(
+        text = product.name,
+        style = MaterialTheme.typography.titleMedium.copy(
+          color = Color.Black,
+          fontWeight = FontWeight.Bold
+        )
+      )
+      Text(
+        text = product.description,
+        style = MaterialTheme.typography.bodySmall.copy(
+          color = Color.Gray,
+        ),
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+      )
+      Spacer(modifier = Modifier.height(4.dp))
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+      ) {
+        Text(
+          text = "$%.2f".format(Locale.US, product.price),
+          style = MaterialTheme.typography.titleMedium.copy(
+            color = LightBrown,
+            fontWeight = FontWeight.Bold
+          )
+        )
+        IconButton(
+          onClick = onAddClick,
+          modifier = Modifier.background(
+            color = LightBrown,
+            shape = RoundedCornerShape(8.dp)
+          )
+        ) {
+          Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Add to Cart",
+            tint = IvoryWhite
+          )
+        }
+      }
+
     }
+  }
 }

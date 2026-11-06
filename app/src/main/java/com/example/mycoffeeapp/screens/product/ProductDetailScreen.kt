@@ -59,236 +59,236 @@ private val BorderGray = Color(0xFFE3E3E3)
 
 @Composable
 fun ProductDetailScreen(
-    product: Product,
-    onBackClick: () -> Unit = {},
-    onFavoriteClick: () -> Unit = {},
-    onAddToCart: (Product, CoffeeSize) -> Unit = { _, _ -> },
+  product: Product,
+  onBackClick: () -> Unit = {},
+  onFavoriteClick: () -> Unit = {},
+  onAddToCart: (Product, CoffeeSize) -> Unit = { _, _ -> },
 ) {
-    var selectedSize by remember { mutableStateOf(CoffeeSize.M) }
+  var selectedSize by remember { mutableStateOf(CoffeeSize.M) }
 
-    Scaffold(
-        containerColor = DetailBackground,
-        topBar = {
-            DetailTopBar(onBackClick = onBackClick, onFavoriteClick = onFavoriteClick)
-        },
-        bottomBar = {
-            DetailBottomBar(
-                price = product.price,
-                onAddToCart = { onAddToCart(product, selectedSize) },
-            )
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp),
+  Scaffold(
+    containerColor = DetailBackground,
+    topBar = {
+      DetailTopBar(onBackClick = onBackClick, onFavoriteClick = onFavoriteClick)
+    },
+    bottomBar = {
+      DetailBottomBar(
+        price = product.price,
+        onAddToCart = { onAddToCart(product, selectedSize) },
+      )
+    },
+  ) { innerPadding ->
+    Column(
+      modifier = Modifier
+          .fillMaxSize()
+          .padding(innerPadding)
+          .verticalScroll(rememberScrollState())
+          .padding(horizontal = 24.dp),
+    ) {
+      Spacer(modifier = Modifier.height(8.dp))
+
+      // Ảnh sản phẩm
+      Image(
+        painter = painterResource(id = product.imageUrl),
+        contentDescription = product.name,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .clip(RoundedCornerShape(16.dp)),
+      )
+
+      Spacer(modifier = Modifier.height(16.dp))
+
+      // Tên + loại (Ice / Hot) + icon hạt cà phê
+      Text(
+        text = product.name,
+        color = CharcoalGray,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.SemiBold,
+      )
+      Spacer(modifier = Modifier.height(4.dp))
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        Text(text = "Ice / Hot", color = SecondaryText, fontSize = 12.sp)
+        Box(
+          modifier = Modifier
+              .size(40.dp)
+              .background(SelectedSizeBackground, RoundedCornerShape(12.dp)),
+          contentAlignment = Alignment.Center,
         ) {
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Ảnh sản phẩm
-            Image(
-                painter = painterResource(id = product.imageUrl),
-                contentDescription = product.name,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Tên + loại (Ice / Hot) + icon hạt cà phê
-            Text(
-                text = product.name,
-                color = CharcoalGray,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(text = "Ice / Hot", color = SecondaryText, fontSize = 12.sp)
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .background(SelectedSizeBackground, RoundedCornerShape(12.dp)),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.default_bean),
-                        contentDescription = "Coffee bean",
-                        modifier = Modifier.size(20.dp),
-                    )
-                }
-            }
-
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 16.dp),
-                color = BorderGray,
-            )
-
-            // Mô tả
-            Text(
-                text = "Description",
-                color = CharcoalGray,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = product.description,
-                color = SecondaryText,
-                fontSize = 14.sp,
-                lineHeight = 20.sp,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis,
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Chọn size
-            Text(
-                text = "Size",
-                color = CharcoalGray,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                CoffeeSize.entries.forEach { size ->
-                    SizeOption(
-                        label = size.label,
-                        selected = size == selectedSize,
-                        onClick = { selectedSize = size },
-                        modifier = Modifier.weight(1f),
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
+          Image(
+            painter = painterResource(id = R.drawable.default_bean),
+            contentDescription = "Coffee bean",
+            modifier = Modifier.size(20.dp),
+          )
         }
+      }
+
+      HorizontalDivider(
+        modifier = Modifier.padding(vertical = 16.dp),
+        color = BorderGray,
+      )
+
+      // Mô tả
+      Text(
+        text = "Description",
+        color = CharcoalGray,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+      )
+      Spacer(modifier = Modifier.height(8.dp))
+      Text(
+        text = product.description,
+        color = SecondaryText,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        maxLines = 3,
+        overflow = TextOverflow.Ellipsis,
+      )
+
+      Spacer(modifier = Modifier.height(24.dp))
+
+      // Chọn size
+      Text(
+        text = "Size",
+        color = CharcoalGray,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+      )
+      Spacer(modifier = Modifier.height(12.dp))
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+      ) {
+        CoffeeSize.entries.forEach { size ->
+          SizeOption(
+            label = size.label,
+            selected = size == selectedSize,
+            onClick = { selectedSize = size },
+            modifier = Modifier.weight(1f),
+          )
+        }
+      }
+
+      Spacer(modifier = Modifier.height(24.dp))
     }
+  }
 }
 
 @Composable
 private fun DetailTopBar(
-    onBackClick: () -> Unit,
-    onFavoriteClick: () -> Unit,
+  onBackClick: () -> Unit,
+  onFavoriteClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .statusBarsPadding()
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-    ) {
-        IconButton(onClick = onBackClick, modifier = Modifier.align(Alignment.CenterStart)) {
-            Icon(
-                painter = painterResource(id = R.drawable.regular_outline_arrow_left),
-                contentDescription = "Back",
-                tint = CharcoalGray,
-                modifier = Modifier.size(24.dp),
-            )
-        }
-        Text(
-            text = "Detail",
-            color = CharcoalGray,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.align(Alignment.Center),
-        )
-        IconButton(onClick = onFavoriteClick, modifier = Modifier.align(Alignment.CenterEnd)) {
-            Icon(
-                painter = painterResource(id = R.drawable.regular_outline_heart),
-                contentDescription = "Add to Favorites",
-                tint = CharcoalGray,
-                modifier = Modifier.size(24.dp),
-            )
-        }
+  Box(
+    modifier = Modifier
+        .fillMaxWidth()
+        .statusBarsPadding()
+        .padding(horizontal = 12.dp, vertical = 8.dp),
+  ) {
+    IconButton(onClick = onBackClick, modifier = Modifier.align(Alignment.CenterStart)) {
+      Icon(
+        painter = painterResource(id = R.drawable.regular_outline_arrow_left),
+        contentDescription = "Back",
+        tint = CharcoalGray,
+        modifier = Modifier.size(24.dp),
+      )
     }
+    Text(
+      text = "Detail",
+      color = CharcoalGray,
+      fontSize = 18.sp,
+      fontWeight = FontWeight.SemiBold,
+      modifier = Modifier.align(Alignment.Center),
+    )
+    IconButton(onClick = onFavoriteClick, modifier = Modifier.align(Alignment.CenterEnd)) {
+      Icon(
+        painter = painterResource(id = R.drawable.regular_outline_heart),
+        contentDescription = "Add to Favorites",
+        tint = CharcoalGray,
+        modifier = Modifier.size(24.dp),
+      )
+    }
+  }
 }
 
 @Composable
 private fun SizeOption(
-    label: String,
-    selected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+  label: String,
+  selected: Boolean,
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier,
 ) {
-    val shape = RoundedCornerShape(12.dp)
-    Box(
-        modifier = modifier
-            .height(44.dp)
-            .clip(shape)
-            .background(if (selected) SelectedSizeBackground else Color.White)
-            .border(
-                BorderStroke(1.dp, if (selected) LightBrown else BorderGray),
-                shape,
-            )
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = label,
-            color = if (selected) LightBrown else CharcoalGray,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
+  val shape = RoundedCornerShape(12.dp)
+  Box(
+    modifier = modifier
+        .height(44.dp)
+        .clip(shape)
+        .background(if (selected) SelectedSizeBackground else Color.White)
+        .border(
+            BorderStroke(1.dp, if (selected) LightBrown else BorderGray),
+            shape,
         )
-    }
+        .clickable(onClick = onClick),
+    contentAlignment = Alignment.Center,
+  ) {
+    Text(
+      text = label,
+      color = if (selected) LightBrown else CharcoalGray,
+      fontSize = 14.sp,
+      fontWeight = FontWeight.Medium,
+    )
+  }
 }
 
 @Composable
 private fun DetailBottomBar(
-    price: Double,
-    onAddToCart: () -> Unit,
+  price: Double,
+  onAddToCart: () -> Unit,
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-            .navigationBarsPadding()
-            .padding(horizontal = 24.dp, vertical = 16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column {
-            Text(text = "Price", color = SecondaryText, fontSize = 14.sp)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "$ %.2f".format(Locale.US, price),
-                color = LightBrown,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.SemiBold,
-            )
-        }
-        Spacer(modifier = Modifier.width(32.dp))
-        Button(
-            onClick = onAddToCart,
-            modifier = Modifier
-                .weight(1f)
-                .height(56.dp),
-            shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = LightBrown),
-        ) {
-            Text(
-                text = "Add To Cart",
-                color = Color.White,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-            )
-        }
+  Row(
+    modifier = Modifier
+        .fillMaxWidth()
+        .background(Color.White, RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+        .navigationBarsPadding()
+        .padding(horizontal = 24.dp, vertical = 16.dp),
+    verticalAlignment = Alignment.CenterVertically,
+  ) {
+    Column {
+      Text(text = "Price", color = SecondaryText, fontSize = 14.sp)
+      Spacer(modifier = Modifier.height(4.dp))
+      Text(
+        text = "$ %.2f".format(Locale.US, price),
+        color = LightBrown,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.SemiBold,
+      )
     }
+    Spacer(modifier = Modifier.width(32.dp))
+    Button(
+      onClick = onAddToCart,
+      modifier = Modifier
+          .weight(1f)
+          .height(56.dp),
+      shape = RoundedCornerShape(16.dp),
+      colors = ButtonDefaults.buttonColors(containerColor = LightBrown),
+    ) {
+      Text(
+        text = "Add To Cart",
+        color = Color.White,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+      )
+    }
+  }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ProductDetailScreenPreview() {
-    ProductDetailScreen(product = MockData.productMockData.first())
+  ProductDetailScreen(product = MockData.productMockData.first())
 }

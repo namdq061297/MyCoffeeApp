@@ -14,26 +14,26 @@ import androidx.compose.ui.unit.dp
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenCategories() {
-    var selectedCategory by remember { mutableIntStateOf(0) }
-    val categories = listOf(
-        "All Coffee",
-        "Tea",
-        "Latte",
-        "Espresso",
-        "Cappuccino",
-        "Mocha",
-        "Frappuccino",
-        "Sandwiches",
-        "Smoothies",
-    )
-    // Danh sách category cuộn ngang
-    LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        itemsIndexed(categories) { index, category ->
-            CategoryChip(
-                label = category,
-                selected = index == selectedCategory,
-                onClick = { selectedCategory = index },
-            )
-        }
+  var selectedCategory by remember { mutableIntStateOf(0) }
+  val categories = listOf(
+    "All Coffee",
+    "Tea",
+    "Latte",
+    "Espresso",
+    "Cappuccino",
+    "Mocha",
+    "Frappuccino",
+    "Sandwiches",
+    "Smoothies",
+  )
+  // Danh sách category cuộn ngang
+  LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    itemsIndexed(categories) { index, category ->
+      CategoryChip(
+        label = category,
+        selected = index == selectedCategory,
+        onClick = { selectedCategory = index },
+      )
     }
+  }
 }

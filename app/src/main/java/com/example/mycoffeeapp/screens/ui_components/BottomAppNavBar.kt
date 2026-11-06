@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
@@ -21,58 +20,62 @@ import com.example.mycoffeeapp.ui.theme.LightBrown
 @Preview(showBackground = true)
 @Composable
 fun BottomAppNavBar(
-    currentRoute: String = Routes.HOME,
-    onItemClick: (String) -> Unit = {},
+  currentRoute: String = Routes.HOME,
+  onItemClick: (String) -> Unit = {},
 ) {
-    val navBarItems = listOf(
-        BottomAppNavBarItem(icon = R.drawable.regular_outline_home, label = "Home", route = Routes.HOME),
-        BottomAppNavBarItem(
-            icon = R.drawable.regular_outline_bag,
-            label = "Cart",
-            route = Routes.ORDER
-        ),
-        BottomAppNavBarItem(
-            icon = R.drawable.regular_outline_heart,
-            label = "Favorites",
-            route = "favorites"
-        ),
-        BottomAppNavBarItem(
-            icon = R.drawable.outline_account_circle_24,
-            label = "Profile",
-            route = "profile"
-        )
+  val navBarItems = listOf(
+    BottomAppNavBarItem(
+      icon = R.drawable.regular_outline_home,
+      label = "Home",
+      route = Routes.HOME
+    ),
+    BottomAppNavBarItem(
+      icon = R.drawable.regular_outline_bag,
+      label = "Cart",
+      route = Routes.ORDER
+    ),
+    BottomAppNavBarItem(
+      icon = R.drawable.regular_outline_heart,
+      label = "Favorites",
+      route = "favorites"
+    ),
+    BottomAppNavBarItem(
+      icon = R.drawable.outline_account_circle_24,
+      label = "Profile",
+      route = "profile"
     )
+  )
 
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface,
-        modifier = Modifier.height(100.dp)
-    ) {
-        navBarItems.forEach { item ->
-            NavigationBarItem(
-                selected = item.route == currentRoute,
-                onClick = { onItemClick(item.route) },
-                icon = {
-                    Icon(
-                        painter = painterResource(id = item.icon),
-                        contentDescription = item.label
-                    )
-                },
-                label = { Text(text = item.label) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedTextColor = LightBrown,
-                    selectedIconColor = LightBrown,
-                    unselectedIconColor = Color.DarkGray,
-                    unselectedTextColor = Color.DarkGray,
-                    indicatorColor = LightBrown.copy(alpha = 0.1f)
-                )
-            )
-            // Add navigation bar item logic here
-        }
+  NavigationBar(
+    containerColor = MaterialTheme.colorScheme.surface,
+    modifier = Modifier.height(100.dp)
+  ) {
+    navBarItems.forEach { item ->
+      NavigationBarItem(
+        selected = item.route == currentRoute,
+        onClick = { onItemClick(item.route) },
+        icon = {
+          Icon(
+            painter = painterResource(id = item.icon),
+            contentDescription = item.label
+          )
+        },
+        label = { Text(text = item.label) },
+        colors = NavigationBarItemDefaults.colors(
+          selectedTextColor = LightBrown,
+          selectedIconColor = LightBrown,
+          unselectedIconColor = Color.DarkGray,
+          unselectedTextColor = Color.DarkGray,
+          indicatorColor = LightBrown.copy(alpha = 0.1f)
+        )
+      )
+      // Add navigation bar item logic here
     }
+  }
 }
 
 data class BottomAppNavBarItem(
-    val icon: Int,
-    val label: String,
-    val route: String
+  val icon: Int,
+  val label: String,
+  val route: String
 )
