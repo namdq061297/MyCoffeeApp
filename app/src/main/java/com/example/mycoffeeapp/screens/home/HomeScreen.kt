@@ -37,11 +37,12 @@ import com.example.mycoffeeapp.screens.ui_components.SearchBar
 @Composable
 fun HomeScreen(
     onProductClick: (Product) -> Unit = {},
+    onBottomNavClick: (String) -> Unit = {},
 ) {
     val location = "Hanoi, Vietnam" // Replace with your actual location
 
     Scaffold(
-        bottomBar = { BottomAppNavBar() }
+        bottomBar = { BottomAppNavBar(onItemClick = onBottomNavClick) }
     ) { innerPadding ->
         // Toàn bộ màn hình là một LazyVerticalGrid duy nhất → cuộn đồng nhất.
         // Các section phía trên được đưa vào topContent (item đầu tiên, chiếm full 2 cột).
