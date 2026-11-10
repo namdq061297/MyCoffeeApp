@@ -2,6 +2,7 @@ package com.example.mycoffeeapp.screens.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,8 +33,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.model.Product
+import com.example.mycoffeeapp.screens.ui_components.WishlistHeart
 import com.example.mycoffeeapp.ui.theme.IvoryWhite
 import com.example.mycoffeeapp.ui.theme.LightBrown
 import com.example.mycoffeeapp.ui.theme.LightGray
@@ -46,6 +47,8 @@ fun ProductCard(
   modifier: Modifier = Modifier,
   onClick: () -> Unit = {},
   onAddClick: () -> Unit = {},
+  isInWishlist: Boolean = false,
+  onWishlistClick: () -> Unit = {},
 ) {
   Card(
     onClick = onClick,
@@ -83,17 +86,14 @@ fun ProductCard(
             .background(
                 color = LightGray.copy(alpha = 0.9f),
                 shape = RoundedCornerShape(8.dp)
-            ),
+            )
+            .clip(RoundedCornerShape(8.dp))
+            // Nhận chạm riêng cho tim, để không mở màn Detail như khi bấm vào thẻ
+            .clickable(onClick = onWishlistClick),
           contentAlignment = Alignment.Center, // icon nằm giữa ô
         )
         {
-          Icon(
-            painter = painterResource(id = R.drawable.regular_outline_heart),
-            contentDescription = "Add to Favorites",
-            tint = LightBrown,
-            modifier = Modifier
-              .size(22.dp)
-          )
+          WishlistHeart(isInWishlist = isInWishlist, size = 22.dp)
         }
       }
       Spacer(modifier = Modifier.height(4.dp))

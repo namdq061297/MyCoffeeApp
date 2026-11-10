@@ -48,6 +48,7 @@ import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.mock.MockData
 import com.example.mycoffeeapp.model.CoffeeSize
 import com.example.mycoffeeapp.model.Product
+import com.example.mycoffeeapp.screens.ui_components.WishlistHeart
 import com.example.mycoffeeapp.ui.theme.CharcoalGray
 import com.example.mycoffeeapp.ui.theme.LightBrown
 import java.util.Locale
@@ -61,7 +62,8 @@ private val BorderGray = Color(0xFFE3E3E3)
 fun ProductDetailScreen(
   product: Product,
   onBackClick: () -> Unit = {},
-  onFavoriteClick: () -> Unit = {},
+  isInWishlist: Boolean = false,
+  onWishlistClick: () -> Unit = {},
   onAddToCart: (Product, CoffeeSize) -> Unit = { _, _ -> },
 ) {
   var selectedSize by remember { mutableStateOf(CoffeeSize.M) }
@@ -69,7 +71,11 @@ fun ProductDetailScreen(
   Scaffold(
     containerColor = DetailBackground,
     topBar = {
-      DetailTopBar(onBackClick = onBackClick, onFavoriteClick = onFavoriteClick)
+      DetailTopBar(
+        onBackClick = onBackClick,
+        isInWishlist = isInWishlist,
+        onWishlistClick = onWishlistClick,
+      )
     },
     bottomBar = {
       DetailBottomBar(
@@ -182,7 +188,8 @@ fun ProductDetailScreen(
 @Composable
 private fun DetailTopBar(
   onBackClick: () -> Unit,
-  onFavoriteClick: () -> Unit,
+  isInWishlist: Boolean,
+  onWishlistClick: () -> Unit,
 ) {
   Box(
     modifier = Modifier
@@ -205,13 +212,8 @@ private fun DetailTopBar(
       fontWeight = FontWeight.SemiBold,
       modifier = Modifier.align(Alignment.Center),
     )
-    IconButton(onClick = onFavoriteClick, modifier = Modifier.align(Alignment.CenterEnd)) {
-      Icon(
-        painter = painterResource(id = R.drawable.regular_outline_heart),
-        contentDescription = "Add to Favorites",
-        tint = CharcoalGray,
-        modifier = Modifier.size(24.dp),
-      )
+    IconButton(onClick = onWishlistClick, modifier = Modifier.align(Alignment.CenterEnd)) {
+      WishlistHeart(isInWishlist = isInWishlist, outlineTint = CharcoalGray)
     }
   }
 }

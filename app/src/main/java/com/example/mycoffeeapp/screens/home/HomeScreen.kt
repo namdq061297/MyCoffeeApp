@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycoffeeapp.R
 import com.example.mycoffeeapp.model.Product
+import com.example.mycoffeeapp.model.Wishlist
 import com.example.mycoffeeapp.screens.home.components.HomeScreenCategories
 import com.example.mycoffeeapp.screens.home.components.ProductGrid
 import com.example.mycoffeeapp.screens.ui_components.BottomAppNavBar
@@ -38,6 +39,8 @@ import com.example.mycoffeeapp.screens.ui_components.SearchBar
 fun HomeScreen(
   onProductClick: (Product) -> Unit = {},
   onBottomNavClick: (String) -> Unit = {},
+  wishlist: Wishlist = Wishlist(productIds = emptyList()),
+  onWishlistClick: (Product) -> Unit = {},
 ) {
   val location = "Hanoi, Vietnam" // Replace with your actual location
 
@@ -49,6 +52,8 @@ fun HomeScreen(
     ProductGrid(
       modifier = Modifier.padding(innerPadding),
       onProductClick = onProductClick,
+      wishlist = wishlist,
+      onWishlistClick = onWishlistClick,
       topContent = { HomeHeader(location = location) },
     )
   }
