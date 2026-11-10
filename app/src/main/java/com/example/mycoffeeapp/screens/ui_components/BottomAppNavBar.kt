@@ -32,12 +32,12 @@ fun BottomAppNavBar(
     BottomAppNavBarItem(
       icon = R.drawable.regular_outline_bag,
       label = "Cart",
-      route = Routes.ORDER
+      route = Routes.CART
     ),
     BottomAppNavBarItem(
       icon = R.drawable.regular_outline_heart,
       label = "Favorites",
-      route = "favorites"
+      route = Routes.WISHLIST
     ),
     BottomAppNavBarItem(
       icon = R.drawable.outline_account_circle_24,

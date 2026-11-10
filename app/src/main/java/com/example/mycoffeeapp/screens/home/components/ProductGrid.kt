@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.mycoffeeapp.mock.MockData
 import com.example.mycoffeeapp.model.Product
+import com.example.mycoffeeapp.model.Wishlist
 
 
 @Composable
@@ -17,6 +18,8 @@ fun ProductGrid(
   products: List<Product> = MockData.productMockData,
   onProductClick: (Product) -> Unit = {},
   onAddToCart: (Product) -> Unit = {},
+  wishlist: Wishlist = Wishlist(productIds = emptyList()),
+  onWishlistClick: (Product) -> Unit = {},
   topContent: (@Composable () -> Unit)? = null,
 ) {
   // Lưới 2 cột; khoảng cách giữa các thẻ đến từ padding(8.dp) bên trong ProductCard
@@ -35,6 +38,8 @@ fun ProductGrid(
         product = product,
         onClick = { onProductClick(product) },
         onAddClick = { onAddToCart(product) },
+        isInWishlist = wishlist.contains(product.id),
+        onWishlistClick = { onWishlistClick(product) },
       )
     }
   }
