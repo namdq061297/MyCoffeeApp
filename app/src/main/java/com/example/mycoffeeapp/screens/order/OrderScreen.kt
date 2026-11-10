@@ -71,8 +71,8 @@ fun OrderScreen(
   ) { innerPadding ->
     LazyColumn(
       modifier = Modifier
-          .fillMaxSize()
-          .padding(innerPadding),
+        .fillMaxSize()
+        .padding(innerPadding),
       verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
       item { OrderHeader(onBackClick = onBackClick) }
@@ -141,10 +141,10 @@ private fun OrderItemRow(
 ) {
   Row(
     modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-        .background(SectionBackground, RoundedCornerShape(12.dp))
-        .padding(10.dp),
+      .fillMaxWidth()
+      .padding(horizontal = 16.dp)
+      .background(SectionBackground, RoundedCornerShape(12.dp))
+      .padding(10.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Image(
@@ -152,8 +152,8 @@ private fun OrderItemRow(
       contentDescription = item.product.name,
       contentScale = ContentScale.Crop,
       modifier = Modifier
-          .size(56.dp)
-          .clip(RoundedCornerShape(8.dp)),
+        .size(56.dp)
+        .clip(RoundedCornerShape(8.dp)),
     )
     Spacer(modifier = Modifier.width(12.dp))
     Column(modifier = Modifier.weight(1f)) {
@@ -193,10 +193,10 @@ private fun CountButton(
 ) {
   Box(
     modifier = Modifier
-        .size(28.dp)
-        .clip(CircleShape)
-        .background(LightBrown.copy(alpha = 0.2f))
-        .clickable(onClickLabel = description, onClick = onClick),
+      .size(28.dp)
+      .clip(CircleShape)
+      .background(LightBrown.copy(alpha = 0.2f))
+      .clickable(onClickLabel = description, onClick = onClick),
     contentAlignment = Alignment.Center,
   ) {
     Text(text = symbol, color = LightBrown, fontSize = 18.sp, fontWeight = FontWeight.Bold)
@@ -225,9 +225,9 @@ private fun PaymentSection(
 
     Column(
       modifier = Modifier
-          .fillMaxWidth()
-          .background(SectionBackground, RoundedCornerShape(12.dp))
-          .padding(16.dp),
+        .fillMaxWidth()
+        .background(SectionBackground, RoundedCornerShape(12.dp))
+        .padding(16.dp),
     ) {
       Row(verticalAlignment = Alignment.CenterVertically) {
         Image(
@@ -256,8 +256,8 @@ private fun PaymentSection(
       Button(
         onClick = onPlaceOrder,
         modifier = Modifier
-            .fillMaxWidth()
-            .height(52.dp),
+          .fillMaxWidth()
+          .height(52.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(containerColor = LightBrown),
       ) {
