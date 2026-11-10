@@ -32,7 +32,7 @@ fun BottomAppNavBar(
     BottomAppNavBarItem(
       icon = R.drawable.regular_outline_bag,
       label = "Cart",
-      route = Routes.ORDER
+      route = Routes.CART
     ),
     BottomAppNavBarItem(
       icon = R.drawable.regular_outline_heart,

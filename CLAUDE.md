@@ -18,7 +18,7 @@ Versions live in `gradle/libs.versions.toml`. Pick library versions compiled for
 - **State and coroutines** currently live in `AppNavGraph` (`rememberCoroutineScope`, `collectAsState`). There is no ViewModel or DI yet; confirm with the user before introducing either.
 - **Persistence**: `local_storage/` wraps Preferences DataStore. `LocalStorageService` declares `package com.example.mycoffeeapp.data.local` despite its folder; import it from that package. Use `updateString` for read-modify-write so concurrent taps stay atomic.
 - **Persisted models are Gson JSON** (`CartStorage`). Gson writes `null` into non-null Kotlin fields, so a field added to a stored model arrives as `null` in old data; filter or default it when parsing.
-- **`Product.imageUrl` is an `R.drawable` id**, which changes between builds. Re-resolve stored products from `MockData` by `id` before display, as the Order route does.
+- **`Product.imageUrl` is an `R.drawable` id**, which changes between builds. Re-resolve stored products from `MockData` by `id` before display, as the Cart route does.
 
 ## Agent skills
 

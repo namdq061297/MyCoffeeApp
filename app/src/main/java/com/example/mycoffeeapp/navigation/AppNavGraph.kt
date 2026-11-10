@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 // Tên các route trong app
 object Routes {
   const val HOME = "home"
-  const val ORDER = "order"
+  const val CART = "cart"
   const val PRODUCT_DETAIL = "product_detail/{productId}"
 
   fun productDetail(productId: Int) = "product_detail/$productId"
@@ -44,7 +44,7 @@ fun AppNavGraph(
   // Chuyển tab ở bottom bar. Favorites và Profile chưa có màn hình nên bỏ qua,
   // vì navigate tới route chưa khai báo sẽ làm app crash.
   val onBottomNavClick: (String) -> Unit = { route ->
-    if (route == Routes.HOME || route == Routes.ORDER) {
+    if (route == Routes.HOME || route == Routes.CART) {
       navController.navigate(route) {
         popUpTo(navController.graph.findStartDestination().id) { saveState = true }
         launchSingleTop = true
@@ -64,7 +64,7 @@ fun AppNavGraph(
       )
     }
 
-    composable(Routes.ORDER) {
+    composable(Routes.CART) {
       val cartItems by cartStorage.cartItems.collectAsState(initial = null)
       // Chờ đọc xong dữ liệu để không hiện nhầm "giỏ trống" trong giây lát
       cartItems?.let { items ->

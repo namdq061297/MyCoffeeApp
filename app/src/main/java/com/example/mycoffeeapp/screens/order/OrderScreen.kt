@@ -66,7 +66,7 @@ fun OrderScreen(
   Scaffold(
     containerColor = OrderBackground,
     bottomBar = {
-      BottomAppNavBar(currentRoute = Routes.ORDER, onItemClick = onBottomNavClick)
+      BottomAppNavBar(currentRoute = Routes.CART, onItemClick = onBottomNavClick)
     },
   ) { innerPadding ->
     LazyColumn(
